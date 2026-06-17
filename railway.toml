@@ -1,0 +1,8 @@
+[build]
+builder = "nixpacks"
+
+[build.config]
+buildCommand = "npm run build"
+
+[start]
+cmd = "node server.js"
