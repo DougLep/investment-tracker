@@ -5,17 +5,17 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install ALL dependencies (including dev)
+RUN npm ci
 
 # Copy app files
 COPY . .
 
-# Install dev dependencies needed for build
-RUN npm install --save-dev vite @vitejs/plugin-react tailwindcss postcss autoprefixer
-
 # Build React app
 RUN npm run build
+
+# Clean up dev dependencies (optional, saves space)
+RUN npm prune --production
 
 # Expose port
 EXPOSE 3000
