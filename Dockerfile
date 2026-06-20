@@ -1,24 +1,26 @@
+# Build stage
+FROM node:18 AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+# Production stage
 FROM node:18
 
 WORKDIR /app
 
-# Copy package files
 COPY package*.json ./
+RUN npm ci --only=production
 
-# Install ALL dependencies
-RUN npm ci
+COPY --from=builder /app/dist ./dist
+COPY server.js .
+COPY index.html .
 
-# Copy app files
-COPY . .
-
-# Build React app using npx
-RUN npx vite build
-
-# Remove dev dependencies
-RUN npm prune --production
-
-# Expose port
 EXPOSE 3000
 
-# Start server
 CMD ["node", "server.js"]
