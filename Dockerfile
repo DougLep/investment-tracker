@@ -1,15 +1,3 @@
-# Build stage
-FROM node:18 AS builder
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm ci
-
-COPY . .
-RUN npm run build
-
-# Production stage
 FROM node:18
 
 WORKDIR /app
@@ -17,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production
 
-COPY --from=builder /app/dist ./dist
+COPY dist ./dist
 COPY server.js .
 COPY index.html .
 
