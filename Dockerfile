@@ -11,8 +11,8 @@ RUN npm ci
 # Copy app files
 COPY . .
 
-# Build React app
-RUN npm run build
+# Build React app using npx
+RUN npx vite build
 
 # Remove dev dependencies
 RUN npm prune --production
