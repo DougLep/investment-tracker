@@ -143,7 +143,7 @@ function generateSPCXHistory() {
   const startDate = new Date('2026-06-12');
 
   let currentPrice = 135.00; // Launch price
-  const volatility = 0.03; // Higher volatility for newer stock
+  const volatility = 0.10; // Higher volatility for newer stock
 
   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
     // Skip weekends
