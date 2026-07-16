@@ -98,7 +98,7 @@ app.get('/api/history/tsla', async (req, res) => {
   }
 });
 
-// Generate SPCX historical data (since June 12, 2024)
+// Generate SPCX historical data (since June 12, 2026)
 app.get('/api/history/spcx', async (req, res) => {
   try {
     const data = generateSPCXHistory();
@@ -136,11 +136,11 @@ function generateTSLAHistory() {
   return data;
 }
 
-// Generate realistic SPCX price history (since June 12, 2024)
+// Generate realistic SPCX price history (since June 12, 2026)
 function generateSPCXHistory() {
   const data = [];
   const endDate = new Date();
-  const startDate = new Date('2024-06-12');
+  const startDate = new Date('2026-06-12');
 
   let currentPrice = 201.50; // Launch price
   const volatility = 0.03; // Higher volatility for newer stock
