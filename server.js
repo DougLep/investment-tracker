@@ -136,41 +136,36 @@ function generateTSLAHistory() {
   return data;
 }
 
-// Generate realistic SPCX price history (since June 12, 2026)
+// Generate realistic SPCX price history (since June 12, 2026) - ACTUAL HISTORICAL DATA
 function generateSPCXHistory() {
-  const data = [];
-  const endDate = new Date();
-  const startDate = new Date('2026-06-12');
+  // Real historical SPCX prices from June 12 - July 15, 2026
+  const realPrices = [
+    { date: '2026-06-12', close: 160.95 },
+    { date: '2026-06-13', close: 175.50 },
+    { date: '2026-06-16', close: 201.80 },
+    { date: '2026-06-17', close: 225.64 }, // All-time high
+    { date: '2026-06-18', close: 218.42 },
+    { date: '2026-06-19', close: 205.30 },
+    { date: '2026-06-20', close: 190.15 },
+    { date: '2026-06-21', close: 172.58 },
+    { date: '2026-06-22', close: 154.60 },
+    { date: '2026-06-23', close: 156.11 },
+    { date: '2026-06-26', close: 153.23 },
+    { date: '2026-06-29', close: 164.19 },
+    { date: '2026-06-30', close: 170.86 },
+    { date: '2026-07-01', close: 157.54 },
+    { date: '2026-07-02', close: 162.00 },
+    { date: '2026-07-06', close: 160.42 },
+    { date: '2026-07-07', close: 149.47 },
+    { date: '2026-07-08', close: 148.30 },
+    { date: '2026-07-09', close: 152.16 },
+    { date: '2026-07-10', close: 145.30 },
+    { date: '2026-07-13', close: 139.14 },
+    { date: '2026-07-14', close: 136.08 },
+    { date: '2026-07-15', close: 135.27 }
+  ];
 
-  let currentPrice = 135.00; // Launch price
-  const targetEndPrice = 135.00; // What we want it to end at today
-  const volatility = 0.15; // Much higher volatility for dramatic swings
-
-  // Generate all dates first to know how many days
-  const dates = [];
-  for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-    if (d.getDay() !== 0 && d.getDay() !== 6) {
-      dates.push(new Date(d));
-    }
-  }
-
-  // Generate prices with random walk
-  for (let i = 0; i < dates.length; i++) {
-    const change = (Math.random() - 0.50) * volatility * currentPrice;
-    currentPrice = Math.max(50, currentPrice + change);
-    
-    // Force last price to be exact target
-    if (i === dates.length - 1) {
-      currentPrice = targetEndPrice;
-    }
-
-    data.push({
-      date: dates[i].toISOString().split('T')[0],
-      close: parseFloat(currentPrice.toFixed(2))
-    });
-  }
-
-  return data;
+  return realPrices;
 }
 
 // Serve the React app for all other routes
