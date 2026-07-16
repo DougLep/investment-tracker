@@ -65,7 +65,7 @@ app.get('/api/prices', async (req, res) => {
 
     // For demo purposes - if no API key, use realistic simulated prices
     let tslaPrice = priceCache.tsla || 404.50;
-    let spcxPrice = priceCache.spcx || 201.50;
+    let spcxPrice = priceCache.spcx || 135.00;
 
     // Try to fetch real prices
     const [tslaPriceResult, spcxPriceResult] = await Promise.all([
@@ -142,7 +142,7 @@ function generateSPCXHistory() {
   const endDate = new Date();
   const startDate = new Date('2026-06-12');
 
-  let currentPrice = 201.50; // Launch price
+  let currentPrice = 135.00; // Launch price
   const volatility = 0.03; // Higher volatility for newer stock
 
   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
