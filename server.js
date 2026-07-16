@@ -143,18 +143,29 @@ function generateSPCXHistory() {
   const startDate = new Date('2026-06-12');
 
   let currentPrice = 135.00; // Launch price
-  const volatility = 0.10; // Higher volatility for newer stock
+  const targetEndPrice = 135.00; // What we want it to end at today
+  const volatility = 0.15; // Much higher volatility for dramatic swings
 
+  // Generate all dates first to know how many days
+  const dates = [];
   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-    // Skip weekends
-    if (d.getDay() === 0 || d.getDay() === 6) continue;
+    if (d.getDay() !== 0 && d.getDay() !== 6) {
+      dates.push(new Date(d));
+    }
+  }
 
-    // Random walk for price
-    const change = (Math.random() - 0.48) * volatility * currentPrice; // Slight upward bias
+  // Generate prices with random walk
+  for (let i = 0; i < dates.length; i++) {
+    const change = (Math.random() - 0.50) * volatility * currentPrice;
     currentPrice = Math.max(50, currentPrice + change);
+    
+    // Force last price to be exact target
+    if (i === dates.length - 1) {
+      currentPrice = targetEndPrice;
+    }
 
     data.push({
-      date: d.toISOString().split('T')[0],
+      date: dates[i].toISOString().split('T')[0],
       close: parseFloat(currentPrice.toFixed(2))
     });
   }
